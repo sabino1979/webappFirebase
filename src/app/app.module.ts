@@ -6,13 +6,17 @@ import { FireModule } from './fire/fire.module';
 import { HomeComponent } from './components/home/home.component';
 import { FotoComponent } from './components/foto/foto.component';
 import { CargarComponent } from './components/cargar/cargar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FotoComponent,
-    CargarComponent
+    CargarComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

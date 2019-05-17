@@ -20,7 +20,7 @@ import { FireRoutingModule } from './fire-routing.module';
     AngularFirestoreModule,
     FireRoutingModule
   ],
-  exports:[
+  exports: [
     CommonModule,
     AngularFireAuthModule,
     AngularFireStorageModule,

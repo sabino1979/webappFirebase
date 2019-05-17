@@ -11,6 +11,8 @@ const routes: Routes = [
   {path: '**', pathMatch: 'full', redirectTo: ''}
 ];
 
+
+
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
