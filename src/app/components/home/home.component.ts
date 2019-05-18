@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  foto = new Array(10).fill('./assets/img/android-chrome-512x512.png');
+
   constructor() { }
 
   ngOnInit() {
+
+    console.log(this.foto);
+
   }
 
 }
