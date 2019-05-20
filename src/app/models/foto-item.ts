@@ -4,8 +4,9 @@ export class FotoItem {
    public urlFirestorage: string;
    public subido: boolean;
    public progresso: number;
+   public uid: string;
 
-   constructor( archivo: File){
+   constructor( archivo: File) {
       this.archivo = archivo;
       this.monbreArchivo = archivo.name;
       this.subido = false;

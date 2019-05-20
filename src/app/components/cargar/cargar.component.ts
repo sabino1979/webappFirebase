@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FotoItem } from 'src/app/models/foto-item';
 import { CargarfirebaseService } from 'src/app/services/cargarfirebase.service';
 
+
+
 @Component({
   selector: 'app-cargar',
   templateUrl: './cargar.component.html',
@@ -9,16 +11,14 @@ import { CargarfirebaseService } from 'src/app/services/cargarfirebase.service';
 })
 export class CargarComponent implements OnInit {
 
+
+
   fileList: FileList;
   archivos: FotoItem[] = [];
   NuevoItem: FotoItem;
   Select = 'Selezonar Foto';
 
-  constructor( private _cargar: CargarfirebaseService) {
-
-
-
-  }
+  constructor( private _cargar: CargarfirebaseService) {  }
 
   ngOnInit() {
   }
@@ -35,6 +35,7 @@ export class CargarComponent implements OnInit {
     for (const propried in Object.getOwnPropertyNames(archivo)) {
       const TEMPORALE: File = archivo[propried];
       this.NuevoItem = new FotoItem(TEMPORALE);
+      // this.NuevoItem.monbreArchivo = nombre;
       this.Select = this.NuevoItem.monbreArchivo;
       this.archivos.push(this.NuevoItem);
     }

@@ -1,3 +1,22 @@
-<p>
-  foto works!
-</p>
+<div class="row">
+  <div class="col">
+    <h6>Lista Foto</h6>
+    <ul class="list-group">
+      <li  class="list-group-item" *ngFor="let item of fotos | async">
+        <img class="d-block-inline mr-3" [src]="item.url" width="72"> {{item.nombre}}
+        <i class="btn btn-outline-secondary mr-2 text-right" (click)="itemactualizar=!itemactualizar">actualizar</i>
+        <div class="btn btn-outline-secondary" (click)="delete(item)">Elimnar</div>
+
+        <form (ngSubmit)="formulario(forma, item)" #forma="ngForm" >
+          <div class="input-group mt-3" *ngIf="itemactualizar">
+            <input type="text" class="form-control" name="nombre" ngModel aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">Button</button>
+            </div>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+

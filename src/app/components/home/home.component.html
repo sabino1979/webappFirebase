@@ -3,17 +3,22 @@
   <div class="col">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators" >
+
             <li data-target="#carouselExampleIndicators"
-            *ngFor="let item of foto; let i=index" data-slide-to="{'i'}" class="active"></li>
+            [ngClass]="{'active': i=== 0}"
+            *ngFor="let item of foto; let i=index" data-slide-to="{'i'}">
+            </li>
             <!-- <li data-target="#carouselExampleIndicators" data-slide-to="{'i'}"></li> -->
 
           </ol>
           <div class="carousel-inner">
-            <div class="carousel-item active" >
-              <img [src]="foto[0]" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" *ngFor="let item of foto">
-              <img [src]="item" class="d-block w-100" alt="...">
+            <!-- <div class="carousel-item active" >
+              <img [src]="foto[0].url" class="d-block w-100" alt="...">
+            </div> -->
+            <div class="carousel-item"
+            [ngClass]="{'active': i === 0}"
+            *ngFor="let item of foto; let i=index">
+              <img [src]="item.url" class="d-block w-100" alt="item.nombre">
             </div>
 
           </div>

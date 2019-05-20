@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 // importare Firebase
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+
 import { FotoItem } from '../models/foto-item';
 
 @Injectable({
@@ -11,12 +12,15 @@ export class CargarfirebaseService {
 
   private CARPETA_FIRESTORAGE_IMG = 'img';
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {
+
+   }
 
   // creo el metodo para subir las imagenes
   cargar(imgs: FotoItem[]) {
     // creo una istancia a firebase storage
       const storageRef = firebase.storage().ref();
+
 
       for (const img of imgs) {
         // cambio lo stado de subido a true
@@ -42,15 +46,53 @@ export class CargarfirebaseService {
                 img.subido = false;
                 this.subirImg({
                   nombre: img.monbreArchivo,
-                  url: img.urlFirestorage
+                  url: img.urlFirestorage,
+                  nomearchibo: img.monbreArchivo
                 });
               });
             });
+
       }
   }
 
+
+  delete(img: {nombre: string; uid: string}) {
+    const storaref = firebase.storage().ref();
+    // cancello dal storage firebase
+    storaref.child(`img/${img.nombre.trim()}`).delete().then(() => {
+      console.log(`${img} eliminato`);
+    }).catch(error => console.log(error));
+    //  cancello dal database
+    this.db.collection(`/${this.CARPETA_FIRESTORAGE_IMG}`).doc(img.uid).delete()
+      .then(resp => {
+        console.log('elemento eliminato', resp);
+
+      });
+
+  }
+
+
+
+
+  setNombre(doc: string, nombre: string) {
+
+    this.db.collection(`/${this.CARPETA_FIRESTORAGE_IMG}`).doc(doc).update({ nombre })
+      .then(() => {
+        console.log('actualizado');
+      }).catch(error => console.log(error));
+  }
+
   // creo un metodo per cargare a firebase
-  private subirImg( img: {nombre: string, url: string}){
-    this.db.collection(`/${this.CARPETA_FIRESTORAGE_IMG}`).add(img);
+  private subirImg( img: {nombre: string, url: string, nomearchibo: string}) {
+    this.db.collection(`/${this.CARPETA_FIRESTORAGE_IMG}`).add(img)
+    .then((resp: firebase.firestore.DocumentReference) => {
+      //  console.log(resp.id);
+      this.db.collection(`/${this.CARPETA_FIRESTORAGE_IMG}`).doc(resp.id)
+        .set( { uid: resp.id,
+                nombre: img.nombre,
+                nombrearchivo: img.nomearchibo,
+                url: img.url}).then( (respuesta: any) => console.log(respuesta));
+    });
+
   }
 }
