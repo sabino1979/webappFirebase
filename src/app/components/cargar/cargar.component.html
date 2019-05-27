@@ -1,35 +1,35 @@
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-8 col-6">
     <h6>Seleziona la Img de tus archivos</h6>
 
-        <input id="my-input" (change)="file($event)" class="custom-file-input" type="file">
-        <label for="my-input" class="custom-file-label">{{ Select || NuevoItem.monbreArchivo}}</label>
-        <button type="button" (click)="Enviar()" class="btn btn-primary btn-lg btn-block">Enviar</button>
+        <input id="my-input" (change)="file($event)" class="ml-3 custom-file-input" type="file">
+        <label for="my-input" class=" ml-3 custom-file-label">{{ Select || NuevoItem.monbreArchivo}}</label>
+        <button type="button" (click)="Enviar()" class="btn btn-sm btn-primary btn-block">Enviar</button>
 
   </div>
 </div>
-<div class="row">
+<div class="row mt-5">
   <div class="col">
     <h6>Lista </h6>
     <table class="table table-dark">
       <thead class="thead-dark">
         <tr>
-          <th class="col">Nombre</th>
-          <th class="col">Tamaño</th>
-          <th class="col">Progresso</th>
+          <th class="col text-truncate">Nombre</th>
+          <th class="col text-truncate">Tamaño</th>
+          <th class="col text-truncate">Progresso</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of archivos">
-          <td [ngClass]="{'text-success': item.progresso >= 100}">{{item.monbreArchivo}}</td>
+          <td [ngClass]="{'text-success': item.progresso >= 100}" class="testo">{{item.monbreArchivo}}</td>
           <!-- <td><input type="text" ></td> -->
-          <td>{{item.archivo.size / 1024 / 1024 | number: '.2-2' }}</td>
-          <td>
+          <td class="testo">{{item.archivo.size / 1024 / 1024 | number: '.2-2' }}</td>
+          <td class="testo">
             <div class="progress">
                 <div class="progress-bar bg-primary"
                      role="progressbar"
                      [ngStyle]="{'width': item.progresso + '%'}"
-                    >{{item.progresso}}%</div>
+                    >{{item.progresso.toFixed(0)}}%</div>
             </div>
             </td>
         </tr>

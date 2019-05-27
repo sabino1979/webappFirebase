@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 // importare Firebase
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
 import { FotoItem } from '../models/foto-item';
 
@@ -59,13 +59,13 @@ export class CargarfirebaseService {
   delete(img: {nombre: string; uid: string}) {
     const storaref = firebase.storage().ref();
     // cancello dal storage firebase
-    storaref.child(`img/${img.nombre.trim()}`).delete().then(() => {
+    storaref.child(`img/${img.nombre}`).delete().then(() => {
       console.log(`${img} eliminato`);
     }).catch(error => console.log(error));
     //  cancello dal database
     this.db.collection(`/${this.CARPETA_FIRESTORAGE_IMG}`).doc(img.uid).delete()
-      .then(resp => {
-        console.log('elemento eliminato', resp);
+      .then(() => {
+        console.log('elemento eliminato');
 
       });
 

@@ -38,6 +38,7 @@ export class FotoComponent implements OnInit {
 
   }
   delete(item: Foto) {
+    // console.log(item);
     this._service.delete({nombre: item.nombrearchivo, uid: item.uid});
   }
   formulario(forma: FormControl, item: Foto) {

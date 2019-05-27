@@ -1,11 +1,12 @@
-<div class="row">
+<div class="row mt-5 ">
   <div class="col">
     <h6>Lista Foto</h6>
     <ul class="list-group">
       <li  class="list-group-item" *ngFor="let item of fotos | async">
-        <img class="d-block-inline mr-3" [src]="item.url" width="72"> {{item.nombre}}
-        <i class="btn btn-outline-secondary mr-2 text-right" (click)="itemactualizar=!itemactualizar">actualizar</i>
-        <div class="btn btn-outline-secondary" (click)="delete(item)">Elimnar</div>
+        <img class="d-block-inline mr-3" [src]="item.url" width="72">
+        <p class="d-sm-inline-flex text-center">{{item.nombre}}</p>
+        <button class="btn btn-sm btn-outline-secondary mr-2" (click)="itemactualizar=!itemactualizar">Actualizar</button>
+        <button class="btn  btn-sm btn-outline-secondary" (click)="delete(item)">Elimnar</button>
 
         <form (ngSubmit)="formulario(forma, item)" #forma="ngForm" >
           <div class="input-group mt-3" *ngIf="itemactualizar">
